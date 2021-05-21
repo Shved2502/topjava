@@ -35,10 +35,7 @@ public class UserMealsUtil {
 
         final List<UserMealWithExcess> filteredMeals = new ArrayList <>();
         for (UserMeal meal : meals) {
-            if(meal.getDateTime().isAfter(LocalDateTime.of(meal.getDateTime().getYear(), meal.getDateTime().getMonth(),
-                    meal.getDateTime().getDayOfMonth(), startTime.getHour(), startTime.getMinute())) &&
-            meal.getDateTime().isBefore(LocalDateTime.of(meal.getDateTime().getYear(), meal.getDateTime().getMonth(),
-                    meal.getDateTime().getDayOfMonth(), endTime.getHour(), endTime.getMinute()))) {
+            if (startTime.isBefore(meal.getDateTime().toLocalTime()) && endTime.isAfter(meal.getDateTime().toLocalTime())) {
                 if (userMap.get(LocalDateTime.of(meal.getDateTime().getYear(), meal.getDateTime().getMonth(),
                         meal.getDateTime().getDayOfMonth(), 0, 0)) > caloriesPerDay) {
                     filteredMeals.add(new UserMealWithExcess(meal.getDateTime(), meal.getDescription(), meal.getCalories(), true));
