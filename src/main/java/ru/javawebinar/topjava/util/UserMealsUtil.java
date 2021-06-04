@@ -48,8 +48,8 @@ public class UserMealsUtil {
                 .collect(Collectors.toMap(meal -> meal.getDateTime().toLocalDate(), UserMeal::getCalories, Integer::sum));
 
         final List<UserMealWithExcess> filteredMeals = meals.stream()
-                .filter(meal -> meal.getDateTime().toLocalTime().isAfter(startTime))
-                .filter(meal -> meal.getDateTime().toLocalTime().isBefore(endTime))
+                .filter(meal -> meal.getDateTime().toLocalTime().isAfter(startTime) &&
+                        meal.getDateTime().toLocalTime().isBefore(endTime))
                 .map(meal -> new UserMealWithExcess(meal.getDateTime(), meal.getDescription(), meal.getCalories(),
                         userMap.get(meal.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
