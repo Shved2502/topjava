@@ -32,13 +32,12 @@ public class MealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        log.debug("redirect to meals");
+        log.debug("redirect to meals");
 
-//        List<MealTo> meals = MealsUtil.hardcoredList();
-//        request.setAttribute("meals", meals);
-//        request.getRequestDispatcher("/meals.jsp").forward(request, response);
+        request.setAttribute("meals", MealsUtil.getWithExcess(MealsUtil.MEALS, 2000));
+        request.getRequestDispatcher("/meals.jsp").forward(request, response);
 
-        String forward="";
+        /*String forward="";
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")){
@@ -59,10 +58,9 @@ public class MealServlet extends HttpServlet {
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        view.forward(request, response);*/
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }
