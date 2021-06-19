@@ -2,14 +2,14 @@ package ru.javawebinar.topjava.dao;
 
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
-import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.util.List;
 
-public class MealsDao {
-    private List<MealTo> list = MealsUtil.hardcoredList();
+public interface MealsDao {
 
-    public synchronized void addMeal(Meal meal){
-
-    }
+    void addMeal(Meal meal);
+    void deleteMeal(long id);
+    void updateMeal(Meal meal);
+    List<MealTo> getAllMeals();
+    MealTo getById(long id);
 }

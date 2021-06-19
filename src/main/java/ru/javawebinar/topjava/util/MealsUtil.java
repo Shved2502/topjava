@@ -65,4 +65,14 @@ public class MealsUtil {
     private static MealTo createTo(Meal meal, boolean excess) {
         return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
+
+    private static Map<LocalDate, Integer> groupingByDate(List<Meal> meals) {
+        return meals.stream().collect(Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories)));
+    }
+
+    public static boolean getExcess(List<MealTo> meals, LocalDate localDate) {
+        return meals.stream()
+                .collect(Collectors.groupingBy(MealTo::getDateTime, Collectors.summingInt(MealTo::getCalories)))
+                .get(localDate) > 2000;
+    }
 }
