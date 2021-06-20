@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MealsUtil {
+    private static Integer CALORIES = 2000;
+
     public static List<Meal> MEALS = Arrays.asList(
             new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500),
             new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000),
@@ -24,8 +26,6 @@ public class MealsUtil {
     );
 
     public static void main(String[] args) {
-
-
         List<MealTo> mealsTo = filteredByStreams(MEALS, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
         mealsTo.forEach(System.out::println);
     }
@@ -47,17 +47,13 @@ public class MealsUtil {
         return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
 
-    private static Map<LocalDate, Integer> groupingByDate(List<Meal> meals) {
-        return meals.stream().collect(Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories)));
-    }
-
     public static boolean getExcess(List<MealTo> meals, LocalDate localDate) {
         return meals.stream()
                 .collect(Collectors.groupingBy(MealTo::getDateTime, Collectors.summingInt(MealTo::getCalories)))
                 .get(localDate) > 2000;
     }
 
-    public static List<MealTo> getWithExcess(List<Meal> meals, int calories) {
-        return filteredByStreams(meals, LocalTime.MIN, LocalTime.MAX, calories);
+    public static List<MealTo> getWithExcess(List<Meal> meals) {
+        return filteredByStreams(meals, LocalTime.MIN, LocalTime.MAX, CALORIES);
     }
 }

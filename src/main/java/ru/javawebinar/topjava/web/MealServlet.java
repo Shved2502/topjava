@@ -20,47 +20,40 @@ public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(MealServlet.class);
 
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/meals.jsp";
-    private static String LIST_MEALS = "/meals.jsp";
     private MealsDaoImpl dao;
 
     public MealServlet() {
         super();
-        dao = new MealsDaoImpl() {
-        };
+        dao = new MealsDaoImpl() {};
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("redirect to meals");
 
-        request.setAttribute("meals", MealsUtil.getWithExcess(MealsUtil.MEALS, 2000));
+        request.setAttribute("meals", MealsUtil.getWithExcess(MealsUtil.MEALS));
         request.getRequestDispatcher("/meals.jsp").forward(request, response);
 
-        /*String forward="";
         String action = request.getParameter("action");
 
-        if (action.equalsIgnoreCase("delete")){
-            int mealId = Integer.parseInt(request.getParameter("mealId"));
-            dao.deleteMeal(mealId);
-            forward = LIST_MEALS;
-            request.setAttribute("meals", dao.getAllMeals());
-        } else if (action.equalsIgnoreCase("edit")){
-            forward = INSERT_OR_EDIT;
-            int mealId = Integer.parseInt(request.getParameter("mealId"));
-            MealTo meal = dao.getById(mealId);
-            request.setAttribute("meal", meal);
-        } else if (action.equalsIgnoreCase("listUser")){
-            forward = LIST_MEALS;
-            request.setAttribute("meals", dao.getAllMeals());
-        } else {
-            forward = INSERT_OR_EDIT;
+        switch (action) {
+            case "delete":
+                dao.deleteMeal(Integer.parseInt(request.getParameter("id")));
+                response.sendRedirect("meals");
+                break;
+            case "update":
+                MealTo meal = dao.getById(Integer.parseInt(request.getParameter("id")));
+                request.setAttribute("meal", meal);
+                request.getRequestDispatcher("/mealForm.jsp").forward(request, response);
+            default:
+                request.setAttribute("meals", MealsUtil.getWithExcess(MealsUtil.MEALS));
+                request.getRequestDispatcher("/meals.jsp").forward(request, response);
+                break;
         }
-
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);*/
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //TODO
     }
 }

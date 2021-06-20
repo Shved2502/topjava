@@ -7,7 +7,7 @@ import ru.javawebinar.topjava.util.MealsUtil;
 import java.util.List;
 
 public class MealsDaoImpl implements MealsDao {
-    private List<MealTo> listMeals = MealsUtil.getWithExcess(MealsUtil.MEALS, 2000);
+    private List<MealTo> listMeals = MealsUtil.getWithExcess(MealsUtil.MEALS);
 
     @Override
     public synchronized void addMeal(Meal meal) {

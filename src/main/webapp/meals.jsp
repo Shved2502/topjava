@@ -25,15 +25,21 @@
     <th>Date</th>
     <th>Description</th>
     <th>Calories</th>
+    <th></th>
+    <th></th>
   </tr>
+  <tbody>
   <c:forEach var="meal" items="${meals}">
     <jsp:useBean id="meals" scope="request" type="java.util.List<ru.javawebinar.topjava.model.MealTo>"/>
     <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
       <td><javatime:format value="${meal.dateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
       <td>${meal.description}</td>
       <td>${meal.calories}</td>
+      <td><a href="MealServlet?action=update&mealId=<c:out value="${meal.id}"/>">Update</a></td>
+      <td><a href="MealServlet?action=delete&mealId=<c:out value="${meal.id}"/>">Delete</a></td>
     </tr>
   </c:forEach>
+  </tbody>
 </table>
 </body>
 </html>
