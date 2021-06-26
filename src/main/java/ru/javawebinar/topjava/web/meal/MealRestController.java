@@ -8,6 +8,8 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.web.SecurityUtil;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -34,6 +36,6 @@ public class MealRestController {
 
     public List<Meal> getAll() {
         log.info("getAll");
-        return null;
+        return service.getAll(SecurityUtil.authUserId(), LocalDate.MIN, LocalDate.MAX, LocalTime.MIN, LocalTime.MAX);
     }
 }
