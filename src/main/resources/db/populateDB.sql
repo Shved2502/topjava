@@ -12,10 +12,10 @@ VALUES ('USER', 100000),
        ('ADMIN', 100001);
 
 INSERT INTO meals (date_time, description, calories, user_id)
-VALUES (date_trunc('minute', TIMESTAMP'2020-01-30 10:00:10'), 'Завтрак', 500, 100000),
-       (date_trunc('minute', TIMESTAMP'2020-01-30 13:00:10'), 'Обед', 1000, 100000),
-       (date_trunc('minute', TIMESTAMP'2020-01-30 20:00:10'), 'Ужин', 500, 100000),
-       (date_trunc('minute', TIMESTAMP'2020-01-31 00:00:10'), 'Граничное значение', 100, 100000),
-       (date_trunc('minute', TIMESTAMP'2020-01-31 10:00:10'), 'Завтрак', 1000, 100000),
-       (date_trunc('minute', TIMESTAMP'2020-01-31 13:00:10'), 'Обед', 500, 100000),
-       (date_trunc('minute', TIMESTAMP'2020-01-31 20:00:10'), 'Ужин', 410, 100000);
+VALUES (date_trunc('minute', TIMESTAMP'2020-01-30 10:00:00'), 'Завтрак', 500, 100000),
+       (date_trunc('minute', TIMESTAMP'2020-01-30 13:00:00'), 'Обед', 1000, 100001),
+       (date_trunc('minute', TIMESTAMP'2020-01-30 20:00:00'), 'Ужин', 500, 100000),
+       (date_trunc('minute', TIMESTAMP'2020-01-31 00:00:00'), 'Граничное значение', 100, 100001),
+       (date_trunc('minute', TIMESTAMP'2020-01-31 10:00:00'), 'Завтрак', 1000, 100000),
+       (date_trunc('minute', TIMESTAMP'2020-01-31 13:00:00'), 'Обед', 500, 100001),
+       (date_trunc('minute', TIMESTAMP'2020-01-31 20:00:00'), 'Ужин', 410, 100000);
